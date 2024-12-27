@@ -143,8 +143,8 @@
     }
 
     @keyframes candleFlame {
-      0% { opacity: 0.7; }
-      100% { opacity: 1; }
+      0% { opacity: 0.7; transform: translateY(-5px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     /* Birthday Message */
@@ -179,6 +179,16 @@
     button:hover {
       background: #ff3e30;
       transform: scale(1.1);
+    }
+
+    /* Blow Out Animation */
+    .blow-out {
+      animation: blowOut 1s forwards;
+    }
+
+    @keyframes blowOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; transform: scale(0); }
     }
 
   </style>
@@ -245,7 +255,21 @@
       document.getElementById('birthdayCard').classList.add('open');
       setTimeout(function() {
         document.getElementById('cakeContainer').style.display = 'flex';
+        blowOutCandles();
       }, 500);
+    }
+
+    // Blow Out Candles Animation
+    function blowOutCandles() {
+      const candles = document.querySelectorAll('.cake-candle');
+      candles.forEach(candle => {
+        candle.classList.add('blow-out');
+      });
+      setTimeout(() => {
+        candles.forEach(candle => {
+          candle.style.display = 'none';
+        });
+      }, 1000);
     }
   </script>
 
